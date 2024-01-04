@@ -1,0 +1,29 @@
+class Solution {
+    static String arr[]={"","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    List<String> ans;
+    public List<String> letterCombinations(String digits) {
+        ans=new ArrayList<>();
+        for(int i=0;i<digits.length();i++){
+            addToList(digits.charAt(i)-'0');
+            System.out.println(ans);
+        }
+        return ans;
+    }
+    public List<String> addToList(int digit){
+        if(ans.size()==0){
+            ans=new ArrayList<>(Arrays.asList(arr[digit-1].split("")));
+        }
+        else{
+            // List<String> temp=ans;
+            int n=ans.size();
+            for(int i=0,k=0;k<n;k++){
+                for(int j=0;j<arr[digit-1].length();j++){
+                    ans.add(ans.get(i)+arr[digit-1].charAt(j));
+                }
+                ans.remove(i);
+            }
+            // ans=temp;
+        }
+        return ans;
+    }
+}
