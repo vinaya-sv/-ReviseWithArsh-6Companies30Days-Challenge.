@@ -1,0 +1,30 @@
+class Solution {
+    public int[] smallestTrimmedNumbers(String[] nums, int[][] queries) {
+        int ans[]=new int[queries.length];
+        for(int i=0;i<queries.length;i++){
+            Map<String ,ArrayList<Integer>> arr=new TreeMap<>();
+            for(int j=0;j<nums.length;j++){
+                String val=nums[j].substring(nums[j].length()-queries[i][1],nums[j].length());
+                if(arr.containsKey(val)){
+                    arr.get(val).add(j);
+                }
+                else{
+                    arr.put(val,new ArrayList<Integer>());
+                    arr.get(val).add(j);
+                }
+            }
+                int k=queries[i][0];
+            for(Map.Entry<String, ArrayList<Integer>> m:arr.entrySet()){
+                for(int j=0;j<m.getValue().size();j++){
+                    k--;
+                    if(k==0){
+                        ans[i]=m.getValue().get(j);
+                        break;
+                    }
+
+                }
+            }
+        }
+        return ans;
+    }
+}
