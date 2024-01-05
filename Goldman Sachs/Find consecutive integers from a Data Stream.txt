@@ -1,0 +1,38 @@
+class DataStream {
+    ArrayList<Integer> stream;
+    int value;
+    int k;
+    ArrayList<Integer> temp;
+    public DataStream(int value, int k) {
+        this.stream=new ArrayList<>();
+        this.value=value;
+        this.k=k;
+        temp=new ArrayList<>();
+        temp.add(0);
+    }
+    
+    public boolean consec(int num) {
+        stream.add(num);
+        if(stream.size()<=k)
+            temp.add(num==value?temp.get(temp.size()-1):temp.get(temp.size()-1)+1);
+        if(stream.size()<k){
+            return false;
+        }
+        int val=temp.get(temp.size()-1);
+        if(stream.size()>k){
+            if(num!=value)
+                val++;
+            temp.add(val);
+            if(val!=0 && stream.get(stream.size()-k-1)!=value)
+                temp.set(temp.size()-1,val-1);
+        }
+        
+        return temp.get(temp.size()-1)==0;
+    }
+}
+
+/**
+ * Your DataStream object will be instantiated and called as such:
+ * DataStream obj = new DataStream(value, k);
+ * boolean param_1 = obj.consec(num);
+ */
