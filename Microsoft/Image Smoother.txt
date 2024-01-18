@@ -1,0 +1,48 @@
+class Solution {
+    public int[][] imageSmoother(int[][] img) {
+        int ans[][]=new int[img.length][img[0].length];
+        for(int i=0;i<img.length;i++){
+            for(int j=0;j<img[0].length;j++){
+                ans[i][j]=calAvg(i,j,img.length, img[0].length,img);
+            }
+        }
+        return ans;
+    }
+    public static int calAvg(int i, int j, int m, int n, int img[][]){
+        int count=1;
+        int total=img[i][j];
+        if(i+1<m){
+            total+=img[i+1][j];
+            count++;
+        }
+        if(j+1<n){
+            total+=img[i][j+1];
+            count++;
+        }
+        if(i-1>=0){
+            total+=img[i-1][j];
+            count++;
+        }
+        if(j-1>=0){
+            total+=img[i][j-1];
+            count++;
+        }
+        if(i+1<m && j+1<n){
+            total+=img[i+1][j+1];
+            count++;
+        }
+        if(i-1>=0 && j-1>=0){
+            total+=img[i-1][j-1];
+            count++;
+        }
+        if(i+1<m && j-1>=0){
+            total+=img[i+1][j-1];
+            count++;
+        }
+        if(j+1<n && i-1>=0){
+            total+=img[i-1][j+1];
+            count++;
+        }
+        return (int)Math.floor(total/count);
+    }
+}
